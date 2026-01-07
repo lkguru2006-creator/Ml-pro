@@ -1,4 +1,3 @@
-start
 {
     "css.lint.unknownAtRules": "ignore"
 }
