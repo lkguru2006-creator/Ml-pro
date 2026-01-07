@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView, SafeAr
 
 export default function App() {
     const [messages, setMessages] = useState([
-        { role: 'assistant', content: 'Hello! I am MetaChat AI. How can I help you?' }
+        { role: 'assistant', content: 'Hello! I am Ligma AI. How can I help you?' }
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -25,7 +25,7 @@ export default function App() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ message: userMsg }),
+                body: JSON.stringify({ message: userMsg, language: 'en' }), // Defaulting to EN for now
             });
 
             const text = await response.text();
@@ -42,7 +42,7 @@ export default function App() {
         <SafeAreaView style={styles.container}>
             <StatusBar style="auto" />
             <View style={styles.header}>
-                <Text style={styles.headerTitle}>MetaChat AI</Text>
+                <Text style={styles.headerTitle}>Ligma AI</Text>
             </View>
 
             <ScrollView

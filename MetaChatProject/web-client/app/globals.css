@@ -18,10 +18,15 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom right,
-      rgb(var(--background-start-rgb)),
-      rgb(var(--background-end-rgb)));
+  background: theme('backgroundImage.pastel-dream');
   min-height: 100vh;
+  transition: background 0.5s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: theme('backgroundImage.deep-space');
+  }
 }
 
 /* Glassmorphism Utilities */

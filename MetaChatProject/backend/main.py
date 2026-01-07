@@ -5,7 +5,7 @@ from pydantic import BaseModel
 from service import stream_chat_response
 import asyncio
 
-app = FastAPI(title="MetaChat API")
+app = FastAPI(title="Ligma AI API")
 
 # Enable CORS for Web, Mobile, and Desktop clients
 app.add_middleware(
