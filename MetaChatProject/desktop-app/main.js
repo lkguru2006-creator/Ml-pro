@@ -8,12 +8,12 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
     },
-    title: "Meta AI Chat"
+    title: "Ligma AI"
   });
 
   // Load the Next.js app running on localhost
   // In production, we would load the build output index.html
-  win.loadURL('http://localhost:3000'); 
+  win.loadURL('http://localhost:3000');
   // win.loadFile('index.html'); // For built version
 
   // Remove menu for cleaner look

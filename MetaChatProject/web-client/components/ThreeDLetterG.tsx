@@ -8,7 +8,7 @@ const ThreeDLetterG = () => {
                 {/* For a pure CSS 3D letter without importing 3D models, we use layered text-shadows or stacked elements */}
 
                 <div className="flex items-center justify-center w-full h-full">
-                    <span className="text-[10rem] font-black leading-none text-transparent bg-clip-text bg-gradient-to-br from-meta-base to-meta-light drop-shadow-2xl relative z-10"
+                    <span className="text-[10rem] font-black leading-none text-transparent bg-clip-text bg-gradient-to-br from-brand-base to-brand-light drop-shadow-2xl relative z-10"
                         style={{
                             textShadow: `
                           0px 1px 0px #004DAD,

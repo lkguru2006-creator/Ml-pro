@@ -23,7 +23,7 @@ class ChatRequest(BaseModel):
 
 @app.get("/")
 async def root():
-    return {"status": "ok", "message": "MetaChat API is running"}
+    return {"status": "ok", "message": "Ligma AI API is running"}
 
 @app.post("/chat")
 async def chat_endpoint(request: ChatRequest):

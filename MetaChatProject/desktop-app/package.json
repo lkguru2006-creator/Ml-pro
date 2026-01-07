@@ -1,7 +1,7 @@
 {
-  "name": "metachat-desktop",
+  "name": "ligma-ai-desktop",
   "version": "1.0.0",
-  "description": "MetaChat Desktop Client",
+  "description": "Ligma AI Desktop Client",
   "main": "main.js",
   "scripts": {
     "start": "electron ."

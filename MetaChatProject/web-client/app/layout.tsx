@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "MetaChat AI",
-    description: "Advanced AI Chatbot",
+    title: "Ligma AI Web",
+    description: "Advanced AI Chatbot Service",
 };
 
 export default function RootLayout({

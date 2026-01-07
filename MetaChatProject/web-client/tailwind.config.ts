@@ -11,31 +11,43 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                meta: {
-                    base: "#0064E0", // Classic Meta Blue
+                brand: {
+                    base: "#0064E0", // Classic Blue
                     dark: "#004DAD",
                     light: "#1877F2",
                     surface: "#EBF5FF",
                 },
-                pastel: {
-                    teal: "#2dd4bf",     // Teal-400
-                    lavender: "#a78bfa", // Violet-400
-                    coral: "#fb7185",    // Rose-400
-                    sky: "#38bdf8",      // Sky-400
-                    mint: "#6ee7b7",     // Emerald-300
-                    sunny: "#fcd34d",    // Amber-300
+                aesthetic: {
+                    50: "#f0f9ff",
+                    100: "#e0f2fe",
+                    200: "#bae6fd",
+                    300: "#7dd3fc",
+                    400: "#38bdf8",
+                    500: "#0ea5e9", // Sky blue for vibrant gradients
+                    600: "#0284c7",
+                    700: "#0369a1",
+                    800: "#075985",
+                    900: "#0c4a6e",
                 },
                 glass: {
                     border: "rgba(255, 255, 255, 0.2)",
                     surface: "rgba(255, 255, 255, 0.1)",
                     highlight: "rgba(255, 255, 255, 0.5)",
+                },
+                pastel: {
+                    teal: "#99F2C8",
+                    lavender: "#C5B9FF",
+                    coral: "#FFB7B2",
+                    sky: "#A0E7E5",
+                    mint: "#B4F8C8",
+                    sunny: "#FBE7C6",
                 }
             },
             backgroundImage: {
                 "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
                 "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-                "meta-gradient": "linear-gradient(135deg, #0064E0 0%, #00C6FF 100%)",
-                "pastel-dream": "linear-gradient(to right bottom, #f0f9ff, #cbebff, #e0e7ff, #fae8ff, #ffe4e6)",
+                "brand-gradient": "linear-gradient(135deg, #0064E0 0%, #00C6FF 100%)",
+                "pastel-dream": "linear-gradient(to top right, #fff1eb 0%, #ace0f9 100%)",
                 "deep-space": "linear-gradient(to bottom, #020617, #0f172a, #1e293b)",
             },
             animation: {
