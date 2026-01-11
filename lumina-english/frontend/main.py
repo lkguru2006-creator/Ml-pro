@@ -10,7 +10,7 @@ class LuminaApp:
         self.auth_token = None
         self.user_data = None
         self.setup_page()
-        self.show_login()
+        self.auto_login()
 
     def setup_page(self):
         self.page.title = "Lumina English"
@@ -23,113 +23,35 @@ class LuminaApp:
         }
         self.page.theme = ft.Theme(font_family="Outfit")
 
-    def show_login(self):
+    def auto_login(self):
         self.page.clean()
-        
-        email_field = ft.TextField(
-            label="Email", 
-            border_radius=15, 
-            width=350,
-            prefix_icon="email",
-            focused_border_color="cyan400"
-        )
-        password_field = ft.TextField(
-            label="Password", 
-            password=True, 
-            can_reveal_password=True, 
-            border_radius=15, 
-            width=350,
-            prefix_icon="lock",
-            focused_border_color="cyan400"
-        )
-        
-        error_text = ft.Text(color="red400", visible=False)
-
-        def login_click(e):
-            try:
-                # In a real app we'd use true auth, for demo we auto-login if fields aren't empty
-                if not email_field.value or not password_field.value:
-                    error_text.value = "Please fill in all fields"
-                    error_text.visible = True
-                    self.page.update()
-                    return
-
-                # Perform actual login
-                response = httpx.post(
-                    f"{API_URL}/auth/login", 
-                    data={"username": email_field.value, "password": password_field.value}
-                )
-                if response.status_code == 200:
-                    data = response.json()
-                    self.auth_token = data["access_token"]
-                    self.fetch_user_and_show_dashboard()
-                else:
-                    error_text.value = "Invalid credentials"
-                    error_text.visible = True
-                    self.page.update()
-            except Exception as ex:
-                error_text.value = f"Connection error: {ex}"
-                error_text.visible = True
-                self.page.update()
-
-        login_card = ft.Container(
-            content=ft.Column([
-                ft.Text("Lumina English", size=45, weight="bold", color="cyanaccent"),
-                ft.Text("Your AI-Powered Path to English Mastery", size=16, color="grey400"),
-                ft.Divider(height=20, color="transparent"),
-                email_field,
-                password_field,
-                error_text,
-                ft.Divider(height=10, color="transparent"),
-                ft.ElevatedButton(
-                    "Sign In", 
-                    on_click=login_click,
-                    width=350,
-                    height=50,
-                    style=ft.ButtonStyle(
-                        shape=ft.RoundedRectangleBorder(radius=15),
-                        bgcolor="cyan700",
-                        color="white"
-                    )
-                ),
-                ft.TextButton("Don't have an account? Create one", on_click=lambda _: None)
-            ], horizontal_alignment="center", spacing=15),
-            padding=50,
-            border_radius=30,
-            bgcolor="white,0.05",
-            border=ft.border.all(1, "white,0.1"),
-            blur=ft.Blur(20, 20),
-        )
-
         self.page.add(
-            ft.Stack([
-                # Background decoration
-                ft.Container(
-                    expand=True,
-                    bgcolor="black87",
-                ),
-                ft.Container(
-                    width=400, height=400,
-                    bgcolor="white,0.1",
-                    border_radius=200,
-                    left=-100, top=-100,
-                    blur=ft.Blur(100, 100)
-                ),
-                ft.Container(
-                    width=400, height=400,
-                    bgcolor="purple,0.1",
-                    border_radius=200,
-                    right=-100, bottom=-100,
-                    blur=ft.Blur(100, 100)
-                ),
-                # Login Card
-                ft.Container(
-                    content=login_card,
-                    alignment=ft.alignment.center,
-                    expand=True
-                )
-            ])
+            ft.Container(
+                content=ft.Column([
+                    ft.ProgressRing(),
+                    ft.Text("Starting Lumina English...", size=16, color="grey400")
+                ], horizontal_alignment="center", spacing=20),
+                alignment=ft.Alignment(0, 0),
+                expand=True
+            )
         )
+        
+        try:
+            # Silently login with default test account
+            response = httpx.post(
+                f"{API_URL}/auth/login", 
+                data={"username": "test@example.com", "password": "testpassword"}
+            )
+            if response.status_code == 200:
+                data = response.json()
+                self.auth_token = data["access_token"]
+                self.fetch_user_and_show_dashboard()
+            else:
+                self.page.clean()
+                self.page.add(ft.Text("Authentication Error. Please ensure backend is running with seeded data."))
+        except Exception as ex:
+            self.page.clean()
+            self.page.add(ft.Text(f"Connection error: {ex}"))
 
     def fetch_user_and_show_dashboard(self):
         headers = {"Authorization": f"Bearer {self.auth_token}"}
@@ -157,7 +79,6 @@ class LuminaApp:
                 ft.NavigationRailDestination(icon="stars", label="Rewards"),
             ],
             on_change=self.handle_nav_change,
-            trailing=ft.IconButton("logout", on_click=lambda _: self.show_login(), tooltip="Sign Out")
         )
 
         self.content_area = ft.Container(expand=True, padding=30)
@@ -194,7 +115,7 @@ class LuminaApp:
                         ft.Text(g['name'], size=20, weight="bold"),
                         ft.Text(g['type'].replace('_', ' ').title(), color="grey400"),
                         ft.Divider(height=10, color="transparent"),
-                        ft.ElevatedButton("Play Now", on_click=lambda _: None, 
+                        ft.Button("Play Now", on_click=lambda _: None, 
                                          style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=10)))
                     ], horizontal_alignment="center"),
                     padding=30,
@@ -227,7 +148,7 @@ class LuminaApp:
                         ft.Row([
                             ft.Text(f"💰 {r['cost_coins']}"),
                             ft.Container(expand=True),
-                            ft.ElevatedButton("Unlock", on_click=lambda _: None, 
+                            ft.Button("Unlock", on_click=lambda _: None, 
                                              style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=10)))
                         ])
                     ]),
@@ -336,7 +257,7 @@ class LuminaApp:
                         ft.Text(l['title'], size=18, weight="bold"),
                         ft.Text(f"Level {l['level']}", color="cyan400"),
                         ft.Divider(height=10, color="transparent"),
-                        ft.ElevatedButton("Start Lesson", on_click=create_click_handler(), 
+                        ft.Button("Start Lesson", on_click=create_click_handler(), 
                                          style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=10)))
                     ]),
                     padding=20,
@@ -371,7 +292,7 @@ class LuminaApp:
                 content=ft.Column([
                     ft.Text(list(lesson['quiz_json'].values())[0] if lesson['quiz_json'] else "No quiz for this lesson."),
                     ft.TextField(label="Your Answer", border_radius=10),
-                    ft.ElevatedButton("Submit Answer", bgcolor="cyan700", color="white")
+                    ft.Button("Submit Answer", bgcolor="cyan700", color="white")
                 ], spacing=20),
                 padding=30,
                 border_radius=20,
@@ -480,4 +401,4 @@ def main(page: ft.Page):
     LuminaApp(page)
 
 if __name__ == "__main__":
-    ft.app(target=main)
+    ft.run(main)
