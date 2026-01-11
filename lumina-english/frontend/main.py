@@ -14,7 +14,7 @@ class LuminaApp:
 
     def setup_page(self):
         self.page.title = "Lumina English"
-        self.page.theme_mode = ft.ThemeMode.DARK
+        self.page.theme_mode = "dark"
         self.page.padding = 0
         self.page.window.width = 1200
         self.page.window.height = 900
@@ -96,8 +96,8 @@ class LuminaApp:
             ], horizontal_alignment="center", spacing=15),
             padding=50,
             border_radius=30,
-            bgcolor=ft.colors.with_opacity(0.05, ft.colors.WHITE),
-            border=ft.border.all(1, ft.colors.with_opacity(0.1, ft.colors.WHITE)),
+            bgcolor="white,0.05",
+            border=ft.border.all(1, "white,0.1"),
             blur=ft.Blur(20, 20),
         )
 
@@ -110,14 +110,14 @@ class LuminaApp:
                 ),
                 ft.Container(
                     width=400, height=400,
-                    bgcolor=ft.colors.with_opacity(0.1, "white"),
+                    bgcolor="white,0.1",
                     border_radius=200,
                     left=-100, top=-100,
                     blur=ft.Blur(100, 100)
                 ),
                 ft.Container(
                     width=400, height=400,
-                    bgcolor=ft.colors.with_opacity(0.1, "purple"),
+                    bgcolor="purple,0.1",
                     border_radius=200,
                     right=-100, bottom=-100,
                     blur=ft.Blur(100, 100)
@@ -144,10 +144,10 @@ class LuminaApp:
         # Navigation Rail
         self.rail = ft.NavigationRail(
             selected_index=0,
-            label_type=ft.NavigationRailLabelType.ALL,
+            label_type="all",
             min_width=100,
             min_extended_width=200,
-            bgcolor=ft.colors.with_opacity(0.05, "white"),
+            bgcolor="white,0.05",
             group_alignment=-0.9,
             destinations=[
                 ft.NavigationRailDestination(icon="dashboard", label="Home"),
@@ -200,16 +200,16 @@ class LuminaApp:
                     padding=30,
                     width=250,
                     border_radius=20,
-                    bgcolor=ft.colors.with_opacity(0.05, ft.colors.WHITE),
+                    bgcolor="white,0.05",
                 )
             )
 
         self.content_area.content = ft.Column([
             ft.Text("Learn through Play", size=32, weight="bold"),
-            ft.Text("Master vocabulary and grammar with mini-games", color=ft.colors.GREY_400),
+            ft.Text("Master vocabulary and grammar with mini-games", color="grey400"),
             ft.Divider(height=20, color="transparent"),
             game_cards
-        ], scroll=ft.ScrollMode.AUTO)
+        ], scroll="auto")
 
     def render_rewards(self):
         headers = {"Authorization": f"Bearer {self.auth_token}"}
@@ -234,7 +234,7 @@ class LuminaApp:
                     padding=20,
                     width=300,
                     border_radius=20,
-                    bgcolor=ft.colors.with_opacity(0.05, ft.colors.WHITE),
+                    bgcolor="white,0.05",
                 )
             )
 
@@ -243,7 +243,7 @@ class LuminaApp:
             ft.Text("Spend your coins on skins and badges", color="grey400"),
             ft.Divider(height=20, color="transparent"),
             reward_cards
-        ], scroll=ft.ScrollMode.AUTO)
+        ], scroll="auto")
 
     def render_dashboard(self):
         data = self.user_data
@@ -261,7 +261,7 @@ class LuminaApp:
                         ]),
                         padding=10,
                         border_radius=10,
-                        bgcolor=ft.colors.with_opacity(0.05, "white")
+                        bgcolor="white,0.05"
                     )
                 )
 
@@ -289,7 +289,7 @@ class LuminaApp:
                     ]),
                     padding=30,
                     border_radius=20,
-                    bgcolor=ft.colors.with_opacity(0.05, ft.colors.WHITE),
+                    bgcolor="white,0.05",
                     expand=2
                 ),
                 ft.Container(
@@ -302,11 +302,11 @@ class LuminaApp:
                     ], horizontal_alignment="center"),
                     padding=30,
                     border_radius=20,
-                    bgcolor=ft.colors.with_opacity(0.05, "cyan900"),
+                    bgcolor="cyan900,0.05",
                     expand=1
                 )
             ], vertical_alignment="start", spacing=30)
-        ], scroll=ft.ScrollMode.AUTO)
+        ], scroll="auto")
 
     def stat_card(self, emoji, value, label):
         return ft.Container(
@@ -316,7 +316,7 @@ class LuminaApp:
             ], horizontal_alignment="center"),
             padding=15,
             border_radius=15,
-            bgcolor=ft.colors.with_opacity(0.1, ft.colors.WHITE),
+            bgcolor="white,0.1",
             width=100
         )
 
@@ -342,7 +342,7 @@ class LuminaApp:
                     padding=20,
                     width=300,
                     border_radius=15,
-                    bgcolor=ft.colors.with_opacity(0.05, ft.colors.WHITE),
+                    bgcolor="white,0.05",
                 )
             )
 
@@ -351,7 +351,7 @@ class LuminaApp:
             ft.Text("Explore structured content from A1 to C1", color="grey400"),
             ft.Divider(height=20, color="transparent"),
             lesson_cards
-        ], scroll=ft.ScrollMode.AUTO)
+        ], scroll="auto")
 
     def open_lesson(self, lesson):
         self.content_area.content = ft.Column([
@@ -362,7 +362,7 @@ class LuminaApp:
             ft.Markdown(
                 lesson['content_md'],
                 selectable=True,
-                extension_set=ft.MarkdownExtensionSet.GITHUB_WEB,
+                extension_set="github_web",
                 expand=True
             ),
             ft.Divider(height=20),
@@ -375,12 +375,12 @@ class LuminaApp:
                 ], spacing=20),
                 padding=30,
                 border_radius=20,
-                bgcolor=ft.colors.with_opacity(0.05, "white")
+                bgcolor="white,0.05"
             )
-        ], scroll=ft.ScrollMode.AUTO)
+        ], scroll="auto")
 
     def render_assistant(self):
-        self.chat_history = ft.Column(expand=True, scroll=ft.ScrollMode.AUTO)
+        self.chat_history = ft.Column(expand=True, scroll="auto")
         self.chat_input = ft.TextField(
             hint_text="Ask Lumina anything...",
             expand=True,
@@ -417,7 +417,7 @@ class LuminaApp:
                 expand=True,
                 padding=20,
                 border_radius=20,
-                bgcolor=ft.colors.with_opacity(0.02, ft.colors.WHITE)
+                bgcolor="white,0.02"
             ),
             ft.Row([
                 self.chat_input,
@@ -459,7 +459,8 @@ class LuminaApp:
             self.chat_history.controls.remove(loading_bubble)
             self.chat_history.controls.append(self.chat_bubble(ai_text, False))
         except Exception as e:
-            self.chat_history.controls.remove(loading_bubble)
+            if loading_bubble in self.chat_history.controls:
+                self.chat_history.controls.remove(loading_bubble)
             self.chat_history.controls.append(self.chat_bubble(f"Error: {e}", False))
         
         self.page.update()
@@ -473,7 +474,7 @@ class LuminaApp:
                 bgcolor="cyan900" if is_user else "grey800",
                 max_width=600,
             )
-        ], alignment=ft.MainAxisAlignment.END if is_user else ft.MainAxisAlignment.START)
+        ], alignment="end" if is_user else "start")
 
 def main(page: ft.Page):
     LuminaApp(page)
