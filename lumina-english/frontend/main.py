@@ -30,7 +30,7 @@ class LuminaApp:
             label="Email", 
             border_radius=15, 
             width=350,
-            prefix_icon=ft.icons.EMAIL_OUTLINED,
+            prefix_icon=ft.icons.EMAIL,
             focused_border_color=ft.colors.CYAN_400
         )
         password_field = ft.TextField(
@@ -39,7 +39,7 @@ class LuminaApp:
             can_reveal_password=True, 
             border_radius=15, 
             width=350,
-            prefix_icon=ft.icons.LOCK_OUTLINED,
+            prefix_icon=ft.icons.LOCK,
             focused_border_color=ft.colors.CYAN_400
         )
         
@@ -150,14 +150,14 @@ class LuminaApp:
             bgcolor=ft.colors.with_opacity(0.05, ft.colors.WHITE),
             group_alignment=-0.9,
             destinations=[
-                ft.NavigationRailDestination(icon=ft.icons.DASHBOARD_ROUNDED, label="Home"),
-                ft.NavigationRailDestination(icon=ft.icons.MENU_BOOK_ROUNDED, label="Lessons"),
-                ft.NavigationRailDestination(icon=ft.icons.SMART_TOY_ROUNDED, label="Assistant"),
-                ft.NavigationRailDestination(icon=ft.icons.GAMES_ROUNDED, label="Games"),
-                ft.NavigationRailDestination(icon=ft.icons.STARS_ROUNDED, label="Rewards"),
+                ft.NavigationRailDestination(icon=ft.icons.DASHBOARD, label="Home"),
+                ft.NavigationRailDestination(icon=ft.icons.MENU_BOOK, label="Lessons"),
+                ft.NavigationRailDestination(icon=ft.icons.SMART_TOY, label="Assistant"),
+                ft.NavigationRailDestination(icon=ft.icons.GAMES, label="Games"),
+                ft.NavigationRailDestination(icon=ft.icons.STARS, label="Rewards"),
             ],
             on_change=self.handle_nav_change,
-            trailing=ft.IconButton(ft.icons.LOGOUT_ROUNDED, on_click=lambda _: self.show_login(), tooltip="Sign Out")
+            trailing=ft.IconButton(ft.icons.LOGOUT, on_click=lambda _: self.show_login(), tooltip="Sign Out")
         )
 
         self.content_area = ft.Container(expand=True, padding=30)
@@ -190,7 +190,7 @@ class LuminaApp:
             game_cards.controls.append(
                 ft.Container(
                     content=ft.Column([
-                        ft.Icon(ft.icons.VIDEOGAME_ASSET_ROUNDED, size=40, color=ft.colors.CYAN_400),
+                        ft.Icon(ft.icons.VIDEOGAME_ASSET, size=40, color=ft.colors.CYAN_400),
                         ft.Text(g['name'], size=20, weight="bold"),
                         ft.Text(g['type'].replace('_', ' ').title(), color=ft.colors.GREY_400),
                         ft.Divider(height=10, color="transparent"),
@@ -356,7 +356,7 @@ class LuminaApp:
     def open_lesson(self, lesson):
         self.content_area.content = ft.Column([
             ft.Row([
-                ft.IconButton(ft.icons.ARROW_BACK_ROUNDED, on_click=lambda _: self.render_lessons()),
+                ft.IconButton(ft.icons.ARROW_BACK, on_click=lambda _: self.render_lessons()),
                 ft.Text(lesson['title'], size=32, weight="bold"),
             ]),
             ft.Markdown(
@@ -421,7 +421,7 @@ class LuminaApp:
             ),
             ft.Row([
                 self.chat_input,
-                ft.IconButton(ft.icons.SEND_ROUNDED, on_click=lambda _: self.send_assistant_message(), icon_color=ft.colors.CYAN_ACCENT)
+                ft.IconButton(ft.icons.SEND, on_click=lambda _: self.send_assistant_message(), icon_color=ft.colors.CYAN_ACCENT)
             ])
         ])
         
